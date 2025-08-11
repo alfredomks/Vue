@@ -16,26 +16,27 @@
                     </v-text-field>
                     <v-combobox
                             clearable
+                            label="Padre"
+                            v-model="storeTarea.tarea.padre"
+                            :items="storeTarea.lista_tareas"
+                            item-value="id"
+                            item-title="nombre"
+                            >
+                    </v-combobox>
+                    <v-combobox
+                            clearable
                             label="Tipo"
-                            v-model="storeTarea.tarea.int_tipo"
+                            v-model="storeTarea.tarea.tipo"
                             :items="storeTarea.lista_tipos"
                             item-value="id"
                             item-title="nombre"
                             >
                     </v-combobox>
-                    <v-combobox
-                            clearable
-                            label="Fase"
-                            v-model="storeTarea.tarea.int_fase"
-                            :items="storeTarea.lista_fases"
-                            item-value="id"
-                            item-title="nombre"
-                            >
-                    </v-combobox>
+                    
                     <v-combobox
                             clearable
                             label="Estado"
-                            v-model="storeTarea.tarea.int_estado"
+                            v-model="storeTarea.tarea.estado"
                             :items="storeTarea.lista_estados"
                             item-value="id"
                             item-title="nombre"
@@ -45,7 +46,7 @@
                     <v-combobox
                             clearable
                             label="Responsable"
-                            v-model="storeTarea.tarea.int_usuario"
+                            v-model="storeTarea.tarea.usuario"
                             :items="storeTarea.lista_usuarios"
                             item-value="id"
                             item-title="nombre"

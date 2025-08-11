@@ -216,6 +216,10 @@
     }
 
     const tareas=(item)=>{
+        storeTareas.get_lista_tipos();
+        storeTareas.get_lista_estados();
+        storeTareas.get_lista_usuarios();
+        storeTareas.get_lista_tareas();
         storeTareas.bol_visible=true;
     }
 

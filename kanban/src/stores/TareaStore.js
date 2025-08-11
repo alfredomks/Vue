@@ -34,29 +34,15 @@ export const useTareaStore=defineStore('tareaStore',{
             {"int_id":5,"str_nombre":"Fecha crea"}
         ],
         cabecera_lista:[
-            
-            { title: 'Tipo',          key: 'tipo',      align: 'start' },
-            { title: 'Nombre',        key: 'nombre',    align: 'start' },
-            { title: 'Fase',          key: 'fase',      align: 'start' },
-            { title: 'Estado',        key: 'estado',    align: 'start' },
-            { title: 'Responsable',   key: 'usuario',   align: 'start' },
-            { title: 'Acciones',      key: 'actions',   sortable: false },
+            { title: 'Trarea',        key: 'nombre',        align: 'start' },
+            { title: 'Tipo',          key: 'str_tipo',      align: 'start' },
+            { title: 'Estado',        key: 'str_estado',    align: 'start' },
+            { title: 'Responsable',   key: 'str_usuario',   align: 'start' },
+            { title: 'Acciones',      key: 'actions',       sortable: false },
         ],
         lista_tareas:[
             {"id":1,"nombre":"Analisis del sistema agenda",    "int_tipo":1, "tipo":"POA", "int_fase":1,"fase":"ANALISIS", "int_estado":1,"estado":"POR HACER","int_usuario":1,"usuario":"marta","descripcion":"Pruebas 1"},
-            {"id":2,"nombre":"Diseño del sistema agenda",      "int_tipo":1, "tipo":"SOPORTE","int_fase":1,"fase":"ANALISIS","int_estado":1,"estado":"POR HACER","int_usuario":1,"usuario":"luis","descripcion":"Pruebas 2"},
-            {"id":3,"nombre":"Desarrollo del sistema agenda",  "int_tipo":1, "tipo":"SOPORTE","int_fase":1,"fase":"ANALISIS","int_estado":1,"estado":"HACIENDO","int_usuario":1,"usuario":"pablo","descripcion":"Pruebas 3"},
-            {"id":4,"nombre":"Pruebas del sistema agenda",     "int_tipo":1, "tipo":"SOPORTE","int_fase":2,"fase":"DISEÑO","int_estado":1,"estado":"HACIENDO","int_usuario":2,"usuario":"pedro","descripcion":"Pruebas 4"},
-            {"id":5,"nombre":"Producción del sistema agenda",  "int_tipo":2, "tipo":"SOPORTE","int_fase":2,"fase":"DISEÑO","int_estado":2,"estado":"HACIENDO","int_usuario":2,"usuario":"juan","descripcion":"Pruebas 5"},
-            {"id":6,"nombre":"Analisis del sistema agenda",    "int_tipo":2, "tipo":"SOPORTE","int_fase":2,"fase":"PRUEBAS","int_estado":2,"estado":"POR HACER","int_usuario":2,"usuario":"marta","descripcion":"Pruebas 1"},
-            {"id":7,"nombre":"Diseño del sistema agenda",      "int_tipo":2, "tipo":"POA","int_fase":3,"fase":"PRUEBAS","int_estado":2,"estado":"HACIENDO","fase":"ANALISIS","int_usuario":2,"usuario":"luis","descripcion":"Pruebas 2"},
-            {"id":8,"nombre":"Desarrollo del sistema agenda",  "int_tipo":2, "tipo":"POA","int_fase":3,"fase":"PRUEBAS","int_estado":2,"estado":"HACIENDO","int_usuario":3,"usuario":"pablo","descripcion":"Pruebas 3"},
-            {"id":9,"nombre":"Pruebas del sistema agenda",     "int_tipo":3, "tipo":"POA","int_fase":3,"fase":"DESARROLLO","int_estado":2,"estado":"HACIENDO","int_usuario":3,"usuario":"pedro","descripcion":"Pruebas 4"},
-            {"id":10,"nombre":"Producción del sistema agenda", "int_tipo":3, "tipo":"POA","int_fase":4,"fase":"DESARROLLO","int_estado":3,"estado":"HACIENDO","int_usuario":3,"usuario":"juan","descripcion":"Pruebas 5"},
-            {"id":11,"nombre":"Pruebas del sistema agenda",    "int_tipo":3, "tipo":"POA","int_fase":4,"fase":"PRODUCCIÓN","int_estado":3,"estado":"POR HACER","int_usuario":4,"usuario":"pedro","descripcion":"Pruebas 4"},
-            {"id":12,"nombre":"Producción del sistema agenda", "int_tipo":3, "tipo":"POA","int_fase":5,"fase":"PRODUCCIÓN","int_estado":2,"estado":"POR HACER","int_usuario":4,"usuario":"juan","descripcion":"Pruebas 5"},
-            {"id":14,"nombre":"Pruebas del sistema agenda",    "int_tipo":3, "tipo":"POA","int_fase":5,"fase":"PRODUCCIÓN","int_estado":2,"estado":"HACIENDO","int_usuario":4,"usuario":"pedro","descripcion":"Pruebas 4"},
-            {"id":15,"nombre":"Producción del sistema agenda", "int_tipo":3, "tipo":"POA","int_fase":5,"fase":"PRODUCCIÓN","int_estado":2,"estado":"HACIENDO","int_usuario":4,"usuario":"juan","descripcion":"Pruebas 5"}
+            {"id":2,"nombre":"Diseño del sistema agenda",      "int_tipo":1, "tipo":"SOPORTE","int_fase":1,"fase":"ANALISIS","int_estado":1,"estado":"POR HACER","int_usuario":1,"usuario":"luis","descripcion":"Pruebas 2"}
         ],
         lista_tipos:[
             {"id":1,"nombre":"REQUERIMIENTO"},
@@ -85,14 +71,57 @@ export const useTareaStore=defineStore('tareaStore',{
     }),
 
     getters:{
-        get_lista_tareas(state){
-            state.lista_tareas;
-        },
-        get_lista_estados(state){
-            state.lista_estados;
-        }
+        
     },
     actions:{
+        get_lista_tipos(){
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/catalogos/getPorGrupo?grupo=2')
+            .then(response => response.json())
+            .then(data => {
+                this.lista_tipos=data;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        },
+
+        get_lista_estados(){
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/catalogos/getPorGrupo?grupo=12')
+            .then(response => response.json())
+            .then(data => {
+                this.lista_estados=data;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        },
+
+        get_lista_usuarios(){
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/catalogos/getPorGrupo?grupo=16')
+            .then(response => response.json())
+            .then(data => {
+                this.lista_usuarios=data;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        },
+        
+        get_lista_tareas(){
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page=0&size=10')
+            .then(response => response.json())
+            .then(data => {
+                this.lista_tareas=data.content;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        },
+
         addTarea(){
             /*
             this.tarea.tipo=this.tipo.nombre;
