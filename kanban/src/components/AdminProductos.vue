@@ -2,25 +2,29 @@
     <v-card
         class="mx-auto"
         hover
+        title="Productos"
     >
-        <v-card-item>
-            <v-card-title>
-                Productos
-            </v-card-title>
+        <template v-slot:prepend>
+                <v-avatar color="primary">
+                    <v-icon icon="mdi mdi-package-variant-closed"></v-icon>
+                </v-avatar>
+        </template>
 
+        <v-card-item>
             <v-card-subtitle>
                 Lista de productos
             </v-card-subtitle>
 
             <v-expansion-panels>
-                <v-expansion-panel
-                    title="Buscar"
-                >
+                <v-expansion-panel>
+                    <v-expansion-panel-title><v-icon color="primary" icon="mdi mdi-magnify"></v-icon>Buscar</v-expansion-panel-title>
                     <v-expansion-panel-text>
                         <div class="container">
                             <v-autocomplete
                             label="Tipo"
-                            :items="['ID', 'Nombre', 'Descripción', 'Fecha crea', 'Fecha inicio', 'Fecha fin']"
+                            item-title="str_nombre"
+                            item-value="int_id"
+                            :items="storeProducto.lista_filtros"
                             >
                             </v-autocomplete>
                             
@@ -88,7 +92,7 @@
                         <v-icon
                             v-bind="props"
                             class="me-2"
-                            size="small"
+                            color="primary"
                             @click="objetivos(item)"
                         >
                         mdi-crosshairs-gps
@@ -101,7 +105,7 @@
                         <v-icon
                             v-bind="props"
                             class="me-2"
-                            size="small"
+                            color="primary"
                             @click="recursos(item)"
                         >
                         mdi-account-group
@@ -114,7 +118,7 @@
                         <v-icon
                             v-bind="props"
                             class="me-2"
-                            size="small"
+                            color="primary"
                             @click="tareas(item)"
                         >
                         mdi-calendar-check
@@ -127,7 +131,7 @@
                         <v-icon
                             v-bind="props"
                             class="me-2"
-                            size="small"
+                            color="primary"
                             @click="sprints(item)"
                         >
                         mdi-clock-time-four
@@ -152,7 +156,8 @@
                     <template v-slot:activator="{ props }">
                         <v-icon
                             v-bind="props"
-                            size="small"
+                            class="me-2"
+                            color="red"
                             @click="eliminar(item)"
                         >
                         mdi-delete

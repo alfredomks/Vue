@@ -5,7 +5,12 @@
                     max-width="800">
             
             <v-card title="Recursos">
-                
+                <template v-slot:prepend>
+                    <v-avatar color="primary">
+                        <v-icon icon="mdi-account-group"></v-icon>
+                    </v-avatar>
+                </template>
+
                 <v-card-item>
                     <v-expansion-panels>
                         <v-expansion-panel
@@ -15,6 +20,8 @@
                                 <div class="container">
                                     <v-autocomplete
                                     label="Tipo"
+                                    item-title="str_nombre"
+                                    item-value="int_id"
                                     :items="storeRecurso.lista_filtros"
                                     >
                                     </v-autocomplete>
@@ -84,6 +91,7 @@
                                     <v-icon
                                         v-bind="props"
                                         size="small"
+                                        color="red"
                                         @click="eliminar(item)"
                                     >
                                     mdi-delete

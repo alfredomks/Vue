@@ -5,7 +5,12 @@
                     max-width="800">
             
             <v-card title="Objetivos">
-                
+                <template v-slot:prepend>
+                    <v-avatar color="primary">
+                        <v-icon icon="mdi-crosshairs-gps"></v-icon>
+                    </v-avatar>
+                </template>
+
                 <v-card-item>
                     <v-expansion-panels>
                         <v-expansion-panel
@@ -15,7 +20,9 @@
                                 <div class="container">
                                     <v-autocomplete
                                     label="Tipo"
-                                    :items="['ID', 'Nombre', 'Descripción', 'Fecha crea', 'Fecha inicio', 'Fecha fin']"
+                                    item-title="str_nombre"
+                                    item-value="int_id"
+                                    :items="storeObjetivo.lista_filtros"
                                     >
                                     </v-autocomplete>
                                     
@@ -84,6 +91,7 @@
                                     <v-icon
                                         v-bind="props"
                                         size="small"
+                                        color="red"
                                         @click="eliminar(item)"
                                     >
                                     mdi-delete
@@ -115,6 +123,7 @@
         var objetivo={  
                     "int_id":null,
                     "int_tipo":null,
+                    "str_tipo":null,
                     "str_descripcion":null
                 };
         storeObjetivo.objetivo=objetivo;

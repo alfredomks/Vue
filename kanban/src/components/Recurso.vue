@@ -5,6 +5,11 @@
                     max-width="500">
             
             <v-card title="Recurso">
+                <template v-slot:prepend>
+                    <v-avatar color="primary">
+                        <v-icon icon="mdi-account-group"></v-icon>
+                    </v-avatar>
+                </template>
                 
                 <v-card-text>
                     <v-text-field
@@ -16,7 +21,7 @@
                     ></v-text-field>
                     
                     <v-autocomplete
-                    v-model="storeRecurso.recurso.itn_tipo"
+                    v-model="storeRecurso.recurso.int_tipo"
                     label="Tipo"
                     :items="storeRecurso.lista_tipo"
                     item-value="int_id"

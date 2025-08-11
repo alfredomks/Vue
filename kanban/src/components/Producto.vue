@@ -5,6 +5,11 @@
                     max-width="500">
             
             <v-card title="Producto">
+                <template v-slot:prepend>
+                        <v-avatar color="primary">
+                            <v-icon icon="mdi mdi-package-variant-closed"></v-icon>
+                        </v-avatar>
+                </template>
                 
                 <v-card-text>
                     <v-text-field
@@ -31,6 +36,39 @@
                     </v-autocomplete>
                     
                     <v-menu
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="auto"
+                        >
+                        <template v-slot:activator="{ props }">
+                            <v-text-field
+                            v-bind="props"
+                            :model-value="dateFormat(storeProducto.producto.str_fecha_crea)"
+                            label="Fecha de inicio"
+                            hint="MM/DD/YYYY"
+                            persistent-hint
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            ></v-text-field>
+                        </template>
+                        
+                        <v-locale-provider locale="es">
+                            <v-date-picker
+                                v-model="storeProducto.producto.str_fecha_crea"
+                                header="Calendario"
+                                max="2026-01-01"
+                                min="2024-06-15"
+                                rounded="xl"
+                                title="Fecha inicio"
+                                @update:model-value="menu1 = false"
+                            ></v-date-picker>
+                        </v-locale-provider>
+                    </v-menu>
+
+                    <v-menu
                         v-model="menu2"
                         :close-on-content-click="false"
                         transition="scale-transition"
@@ -41,7 +79,7 @@
                         <template v-slot:activator="{ props }">
                             <v-text-field
                             v-bind="props"
-                            :model-value="dateFormat()"
+                            :model-value="dateFormat(storeProducto.producto.str_fecha_inicio)"
                             label="Fecha de inicio"
                             hint="MM/DD/YYYY"
                             persistent-hint
@@ -61,7 +99,39 @@
                                 @update:model-value="menu2 = false"
                             ></v-date-picker>
                         </v-locale-provider>
-                       
+                    </v-menu>
+
+                    <v-menu
+                        v-model="menu3"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="auto"
+                        >
+                        <template v-slot:activator="{ props }">
+                            <v-text-field
+                            v-bind="props"
+                            :model-value="dateFormat(storeProducto.producto.str_fecha_fin)"
+                            label="Fecha de inicio"
+                            hint="MM/DD/YYYY"
+                            persistent-hint
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            ></v-text-field>
+                        </template>
+                        
+                        <v-locale-provider locale="es">
+                            <v-date-picker
+                                v-model="storeProducto.producto.str_fecha_fin"
+                                header="Calendario"
+                                max="2026-01-01"
+                                min="2024-06-15"
+                                rounded="xl"
+                                title="Fecha inicio"
+                                @update:model-value="menu3 = false"
+                            ></v-date-picker>
+                        </v-locale-provider>
                     </v-menu>
 
                 </v-card-text>
@@ -102,14 +172,16 @@
     import { useDate } from 'vuetify'
     import { useProductoStore } from '@/stores/ProductoStore';
     const storeProducto = useProductoStore();
+    const menu1=ref(false);
     const menu2=ref(false);
+    const menu3=ref(false);
     const adapter = useDate();
 
-    const dateFormat=()=>{
-        var fecha =new Date(storeProducto.producto.str_fecha_inicio);
+    const dateFormat=(fechaItem)=>{
+        var fecha =new Date(fechaItem);
         return new Intl.DateTimeFormat("en-US").format(fecha);
     }
-    
+
     const guardar=()=>{
         if(storeProducto.producto.int_id==null){
             storeProducto.producto.int_id=storeProducto.lista_productos.length+1;

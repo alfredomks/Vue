@@ -15,7 +15,7 @@
                             clearable
                             label="Tipo"
                             v-model="storeTarea.tipos"
-                            :items="storeTarea.lista_tipo"
+                            :items="storeTarea.lista_tipos"
                             item-value="id"
                             item-title="nombre"
                             :return-object="true"

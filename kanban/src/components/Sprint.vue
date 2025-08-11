@@ -5,15 +5,81 @@
                     max-width="500">
             
             <v-card title="Sprint">
+                <template v-slot:prepend>
+                        <v-avatar color="primary">
+                            <v-icon icon="mdi-clock-time-four"></v-icon>
+                        </v-avatar>
+                </template>
                 
                 <v-card-text>
-                    <v-text-field
-                    v-model="storeSprint.sprint.str_nombre"
-                    name="input-10-1"
-                    label="Nombre"
-                    hint="At least 8 characters"
-                    counter="100"
-                    ></v-text-field>
+                    
+                    <v-menu
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="auto"
+                        >
+                        <template v-slot:activator="{ props }">
+                            <v-text-field
+                            v-bind="props"
+                            :model-value="dateFormatInicio()"
+                            label="Fecha de inicio"
+                            hint="MM/DD/YYYY"
+                            persistent-hint
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            ></v-text-field>
+                        </template>
+                        
+                        <v-locale-provider locale="es">
+                            <v-date-picker
+                                v-model="storeSprint.sprint.str_fecha_inicio"
+                                header="Calendario"
+                                max="2026-01-01"
+                                min="2024-06-15"
+                                rounded="xl"
+                                title="Fecha inicio"
+                                @update:model-value="menu1 = false"
+                            ></v-date-picker>
+                        </v-locale-provider>
+                       
+                    </v-menu>
+
+                    <v-menu
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        max-width="290px"
+                        min-width="auto"
+                        >
+                        <template v-slot:activator="{ props }">
+                            <v-text-field
+                            v-bind="props"
+                            :model-value="dateFormatFin()"
+                            label="Fecha de fin"
+                            hint="MM/DD/YYYY"
+                            persistent-hint
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            ></v-text-field>
+                        </template>
+                        
+                        <v-locale-provider locale="es">
+                            <v-date-picker
+                                v-model="storeSprint.sprint.str_fecha_fin"
+                                header="Calendario"
+                                max="2026-01-01"
+                                min="2024-06-15"
+                                rounded="xl"
+                                title="Fecha inicio"
+                                @update:model-value="menu2 = false"
+                            ></v-date-picker>
+                        </v-locale-provider>
+                       
+                    </v-menu>
 
                     <v-textarea v-model="storeSprint.sprint.str_descripcion"
                                 clearable 
@@ -22,15 +88,6 @@
                     >
 
                     </v-textarea>
-
-                    <v-autocomplete
-                    v-model="storeSprint.sprint.str_estado"
-                    label="Estado"
-                    :items="['ANALISIS', 'DISEÑO', 'DESARROLLO', 'PRUEBAS', 'PRODUCCION']"
-                    >
-                    </v-autocomplete>
-                    
-                    
 
                 </v-card-text>
         
@@ -70,18 +127,19 @@
     import { useDate } from 'vuetify'
     import { useSprintStore } from '@/stores/SprintStore';
     const storeSprint = useSprintStore();
+    const menu1=ref(false);
     const menu2=ref(false);
     const adapter = useDate();
 
-    const dateFormat=()=>{
+    const dateFormatInicio=()=>{
         var fecha =new Date(storeSprint.sprint.str_fecha_inicio);
         return new Intl.DateTimeFormat("en-US").format(fecha);
     }
-    
-    const getDate=()=>{
-        var fecha =adapter.parseISO(storeSprint.sprint.str_fecha_inicio);
-        return fecha;
+    const dateFormatFin=()=>{
+        var fecha =new Date(storeSprint.sprint.str_fecha_fin);
+        return new Intl.DateTimeFormat("en-US").format(fecha);
     }
+    
     const guardar=()=>{
         storeSprint.bol_visible_sprint=false;
     }

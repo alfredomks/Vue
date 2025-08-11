@@ -5,7 +5,12 @@
                     max-width="800">
             
             <v-card title="Sprints">
-                
+                <template v-slot:prepend>
+                        <v-avatar color="primary">
+                            <v-icon icon="mdi-clock-time-four"></v-icon>
+                        </v-avatar>
+                </template>
+                 
                 <v-card-item>
                     <v-expansion-panels>
                         <v-expansion-panel
@@ -63,8 +68,16 @@
                         :items="storeSprint.lista_sprints"
                         hide-default-footer
                         >
+                       
+                        <template v-slot:item.str_fecha_inicio="{ item }">
+                                <span>{{ new Date(item.str_fecha_inicio).toLocaleDateString('en-CA') }}</span>
+                            </template>
+
+                        <template v-slot:item.str_fecha_fin="{ item }">
+                            <span>{{ new Date(item.str_fecha_fin).toLocaleDateString('en-CA') }}</span>
+                        </template>
+                        
                         <template v-slot:item.actions="{item }">
-                           
                             <v-tooltip text="Editar">
                                 <template v-slot:activator="{ props }">
                                     <v-icon
@@ -83,6 +96,7 @@
                                     <v-icon
                                         v-bind="props"
                                         size="small"
+                                        color="red"
                                         @click="eliminar(item)"
                                     >
                                     mdi-delete
@@ -111,15 +125,21 @@
     const storeSprint = useSprintStore();
 
     const nuevo=()=>{
-        console.log('Nuevo sprint');
+        var sprint={
+            "int_id":null,
+            "str_fecha_inicio":null,
+            "str_fecha_fin":null,
+            "str_descripcion":null,
+        };
+        storeSprint.sprint=sprint;
         storeSprint.bol_visible_sprint=true;
     }
-    const editar=()=>{
-        console.log('Editar sprint');
+    const editar=(item)=>{
+        storeSprint.sprint=item;
         storeSprint.bol_visible_sprint=true;
     }
-    const eliminar=()=>{
-        console.log('Eliminar sprint');
+    const eliminar=(item)=>{
+        storeSprint.lista_sprints.splice(item.int_id-1, 1);
     }
 
 </script>

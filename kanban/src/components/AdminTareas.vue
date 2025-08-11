@@ -5,7 +5,11 @@
                     max-width="1000">
             
             <v-card title="Tareas">
-                
+                <template v-slot:prepend>
+                    <v-avatar color="primary">
+                        <v-icon icon="mdi-calendar-check"></v-icon>
+                    </v-avatar>
+                </template>
                 <v-card-item>
                     <v-expansion-panels>
                         <v-expansion-panel
@@ -15,7 +19,9 @@
                                 <div class="container">
                                     <v-autocomplete
                                     label="Tipo"
-                                    :items="['ID', 'Nombre', 'Descripción', 'Fecha crea', 'Fecha inicio', 'Fecha fin']"
+                                    item-title="str_nombre"
+                                    item-value="int_id"
+                                    :items="storeTareas.lista_filtros"
                                     >
                                     </v-autocomplete>
                                     
@@ -84,6 +90,7 @@
                                     <v-icon
                                         v-bind="props"
                                         size="small"
+                                        color="red"
                                         @click="eliminar(item)"
                                     >
                                     mdi-delete
@@ -113,12 +120,27 @@ import NuevaTarea from './NuevaTarea.vue';
     const storeTareas = useTareaStore();
 
     const nuevo=()=>{
+        var tarea={ 
+                "id":null,
+                "nombre":null,  
+                "tipo":null,
+                "fase":null,
+                "estado":null,
+                "usuario":null,
+                "int_tipo":null,
+                "int_fase":null,
+                "int_estado":null,
+                "int_usuario":null,
+                "descripcion":null
+            };
+        storeTareas.tarea=tarea;
         storeTareas.nuevaTarea=true;
     }
-    const editar=()=>{
+    const editar=(item)=>{
+        storeTareas.tarea=item;
         storeTareas.nuevaTarea=true;
     }
-    const eliminar=()=>{
-        console.log('Eliminar sprint');
+    const eliminar=(item)=>{
+        storeTareas.lista_tareas.splice(item.int_id-1, 1);
     }
 </script>

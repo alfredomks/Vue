@@ -13,8 +13,15 @@ export const useProductoStore=defineStore('productoStore',{
             "str_fecha_inicio":null,
             "str_fecha_fin":null
         },
+        lista_filtros:[
+            {"int_id":1,"str_nombre":"ID"},
+            {"int_id":2,"str_nombre":"NOMBRE"},
+            {"int_id":3,"str_nombre":"TIPO"},
+            {"int_id":4,"str_nombre":"Descripción"},
+            {"int_id":5,"str_nombre":"Fecha crea"}
+        ],
         cabecera_lista:[
-              { title: 'ID',            key: 'int_id', align: 'start',  sortable: true,},
+              
               { title: 'Nombre',        key: 'str_nombre', align: 'start' },
               { title: 'Estado',        key: 'str_estado', align: 'start' },
               { title: 'Descripción',   key: 'str_descripcion', align: 'start' },
@@ -25,11 +32,11 @@ export const useProductoStore=defineStore('productoStore',{
         ],
         lista_productos:[
             {"int_id":1,"str_nombre":"CUENTA DIGITAL","str_estado":"Aanalisis","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("01/01/2025"),"str_fecha_inicio": new Date("01/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
-            {"int_id":2,"str_nombre":"CREDIO DIGITAL","str_estado":"Diseño","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("01/01/2025"),"str_fecha_inicio": new Date("01/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
-            {"int_id":3,"str_nombre":"DPF DIGITAL","str_estado":"Desarrollo","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("01/01/2025"),"str_fecha_inicio": new Date("01/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
-            {"int_id":4,"str_nombre":"APP MOVIL","str_estado":"Pruebas","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("01/01/2025"),"str_fecha_inicio": new Date("01/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
-            {"int_id":5,"str_nombre":"APP WEB","str_estado":"Producción","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("01/01/2025"),"str_fecha_inicio": new Date("01/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
-            {"int_id":6,"str_nombre":"SISTEMA DE GESTION","str_estado":"Soporte","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("01/01/2025"),"str_fecha_inicio": new Date("01/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
+            {"int_id":2,"str_nombre":"CREDIO DIGITAL","str_estado":"Diseño","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("02/01/2025"),"str_fecha_inicio": new Date("02/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
+            {"int_id":3,"str_nombre":"DPF DIGITAL","str_estado":"Desarrollo","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("03/01/2025"),"str_fecha_inicio": new Date("03/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
+            {"int_id":4,"str_nombre":"APP MOVIL","str_estado":"Pruebas","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("04/01/2025"),"str_fecha_inicio": new Date("04/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
+            {"int_id":5,"str_nombre":"APP WEB","str_estado":"Producción","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("05/01/2025"),"str_fecha_inicio": new Date("05/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
+            {"int_id":6,"str_nombre":"SISTEMA DE GESTION","str_estado":"Soporte","str_descripcion":"Cuenta que se crea en linea","str_fecha_crea": new Date("06/01/2025"),"str_fecha_inicio": new Date("06/01/2025"),"str_fecha_fin": new Date("01/01/2026")},
         ],
         
     }),

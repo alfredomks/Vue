@@ -1,11 +1,15 @@
 
 <template>
     <div>
-        <v-dialog   v-model="storeObjetivo.bol_visible_objetivo"
-                    max-width="500">
-            
+        <v-dialog   v-model="storeObjetivo.bol_visible_objetivo" max-width="500">
+
             <v-card title="Objetivo">
-                
+                <template v-slot:prepend>
+                    <v-avatar color="primary">
+                        <v-icon icon="mdi-crosshairs-gps"></v-icon>
+                    </v-avatar>
+                </template>
+
                 <v-card-text>
                     
                     <v-autocomplete
