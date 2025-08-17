@@ -21,6 +21,7 @@
                             :items="storeTarea.lista_tareas"
                             item-value="id"
                             item-title="nombre"
+                            :return-object="false"
                             >
                     </v-combobox>
                     <v-combobox
@@ -30,6 +31,7 @@
                             :items="storeTarea.lista_tipos"
                             item-value="id"
                             item-title="nombre"
+                            :return-object="false"
                             >
                     </v-combobox>
                     
@@ -40,7 +42,7 @@
                             :items="storeTarea.lista_estados"
                             item-value="id"
                             item-title="nombre"
-                            :return-object="true"
+                            :return-object="false"
                             >
                     </v-combobox>
                     <v-combobox
@@ -50,7 +52,7 @@
                             :items="storeTarea.lista_usuarios"
                             item-value="id"
                             item-title="nombre"
-                            :return-object="true"
+                            :return-object="false"
                             >
                     </v-combobox>
                  </v-card-text>
@@ -85,11 +87,7 @@
     const storeTarea = useTareaStore();
 
     const guardar=()=>{
-        console.log('Nueva tarea');
-        if(storeTarea.tarea.id==null){
-            storeTarea.tarea.id=storeTarea.lista_tareas.length+1;
-            storeTarea.lista_tareas.push(storeTarea.tarea);
-        }
+        storeTarea.addTarea();
         storeTarea.nuevaTarea=false;
     }
 </script>

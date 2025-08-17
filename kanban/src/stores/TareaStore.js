@@ -26,6 +26,8 @@ export const useTareaStore=defineStore('tareaStore',{
         estado:null,
         usuario:null,
         tareaSeleccionada:null,
+        pagina:1,
+        numero_paginas:0,
         lista_filtros:[
             {"int_id":1,"str_nombre":"ID"},
             {"int_id":2,"str_nombre":"NOMBRE"},
@@ -38,6 +40,8 @@ export const useTareaStore=defineStore('tareaStore',{
             { title: 'Tipo',          key: 'str_tipo',      align: 'start' },
             { title: 'Estado',        key: 'str_estado',    align: 'start' },
             { title: 'Responsable',   key: 'str_usuario',   align: 'start' },
+            { title: 'Fecha crea',    key: 'fecha_crea',    align: 'start' },
+            { title: 'Fecha termina', key: 'fecha_termina', align: 'start' },
             { title: 'Acciones',      key: 'actions',       sortable: false },
         ],
         lista_tareas:[
@@ -111,9 +115,11 @@ export const useTareaStore=defineStore('tareaStore',{
         },
         
         get_lista_tareas(){
-            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page=0&size=10')
+            var pagina=this.pagina-1;
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page='+pagina+'&size=10')
             .then(response => response.json())
             .then(data => {
+                this.numero_paginas=data.totalPages;
                 this.lista_tareas=data.content;
                 console.log(data);
             })
@@ -123,16 +129,69 @@ export const useTareaStore=defineStore('tareaStore',{
         },
 
         addTarea(){
-            /*
-            this.tarea.tipo=this.tipo.nombre;
-            this.tarea.fase=this.fase.nombre;
-            this.tarea.usuario=this.usuario.nombre;
+            console.log(JSON.stringify(this.tarea));
 
-            this.lista_tareas.push(this.tarea);
-            console.log(this.lista_tareas);
-            this.nuevaTarea=false;
-            */
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.tarea)
+              };
+              
+              fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas', requestOptions)
+                .then(async response => {
+                  const data = await response.json();
+
+                  // check for error response
+                  if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                  }
+            
+                  this.postId = data.id;
+                })
+                .catch(error => {
+                  this.errorMessage = error;
+                  console.error('There was an error!', error);
+                });
         },
+
+        async deleteTarea(item){
+            const url = 'http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/'+item.id;
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add any necessary authorization headers here, e.g., 'Authorization': `Bearer ${token}`
+                },
+            };
+
+            fetch(url, requestOptions)
+            .then(response => {
+                // Handle the response
+                if (!response.ok) {
+                    // Handle HTTP errors (e.g., 404, 500)
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.message || 'Failed to delete resource');
+                    });
+                }
+                // If the API returns a response body (e.g., confirmation message), parse it
+                // Otherwise, if no content is expected, you might just return response.status
+                return response.json(); // Or response.text() if expecting plain text
+            })
+            .then(data => {
+                // Process the successful response data
+                console.log('Resource deleted successfully:', data);
+                this.get_lista_tareas();
+                // Update Vue component state, e.g., remove the item from a list
+            })
+            .catch(error => {
+                // Handle network errors or errors thrown during response processing
+                console.error('Error deleting resource:', error);
+                // Display an error message to the user
+            });
+        },
+
         setTareaSeleccionada(tarea){
             //console.log(tarea);
             this.tareaSeleccionada=tarea;

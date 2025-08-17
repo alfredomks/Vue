@@ -61,11 +61,10 @@
     const validarTarea=(tarea)=>{
         var valido=false;
         //console.log(storeTarea.tipo);
-        if( tarea.estado.toLowerCase().includes(props.tipo.toLowerCase()) && 
-            storeTarea.tipos.find(({ nombre }) => nombre === tarea.tipo) &&
-            storeTarea.fases.find(({ nombre }) => nombre === tarea.fase) &&
+        if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) && 
+            storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.tipo) &&
             (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
-             tarea.usuario.toLowerCase().includes(txt_buscar.value.toLowerCase())
+             tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase())
             )){
                 valido=true;
             }
@@ -86,8 +85,8 @@
         var numero=0;
         for (let i = 0; i < storeTarea.lista_tareas.length; i++) {
            var t=storeTarea.lista_tareas[i];
-           if( storeTarea.tipos.find(({ nombre }) => nombre === t.tipo) &&
-               storeTarea.fases.find(({ nombre }) => nombre === t.fase) 
+           if( storeTarea.lista_tipos.find(({ nombre }) => nombre === t.tipo) &&
+               storeTarea.lista_fases.find(({ nombre }) => nombre === t.fase) 
             ){
             numero++;
            }

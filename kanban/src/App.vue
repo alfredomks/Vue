@@ -39,9 +39,9 @@
 
           <v-list-item
                     prepend-icon="mdi-account-circle"
-                    title="Productos"
+                    title="Tareas"
                     value="1"
-                    @click="productos"
+                    @click="tareas"
                   >
             </v-list-item>
             
@@ -70,8 +70,8 @@
 
       <v-main>
         <v-container>
-          <AdminProductos v-if="storeProducto.bol_visible"></AdminProductos>
-          <Tablero        v-if="storeTarea.bol_tablero"></Tablero>
+          <AdminTareas v-if="storeTarea.bol_visible"></AdminTareas>
+          <Tablero     v-if="storeTarea.bol_tablero"></Tablero>
         </v-container>
       </v-main>
     </v-app>
@@ -81,25 +81,31 @@
 <script setup>
   import { ref } from 'vue'
   import Tablero from './components/Tablero.vue'
-  import AdminProductos from './components/AdminProductos.vue';
+  import AdminTareas from './components/AdminTareas.vue';
 
   import { useMenuStore } from './stores/MenuStore'; 
-  import { useProductoStore } from './stores/ProductoStore'; 
   import { useTareaStore } from './stores/TareaStore'; 
 
-  const storeProducto = useProductoStore();
   const storeMenu = useMenuStore();
   const storeTarea = useTareaStore();
 
   const theme = ref('light')
 
-  const productos=()=>{
-    storeProducto.bol_visible=true;
+  const tareas=()=>{
+    storeTarea.get_lista_tipos();
+    storeTarea.get_lista_estados();
+    storeTarea.get_lista_usuarios();
+    storeTarea.get_lista_tareas();
+    storeTarea.bol_visible=true;
     storeTarea.bol_tablero=false;
   }
 
   const tablero=()=>{
-    storeProducto.bol_visible=false;
+    storeTarea.get_lista_tipos();
+    storeTarea.get_lista_estados();
+    storeTarea.get_lista_usuarios();
+    storeTarea.get_lista_tareas();
+    storeTarea.bol_visible=false;
     storeTarea.bol_tablero=true;
   }
 
