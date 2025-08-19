@@ -142,14 +142,21 @@
                 </div>
             </v-card>
     <NuevaTarea></NuevaTarea>
+    <Comentarios></Comentarios>
 </template>
 
 <script setup>
     import {ref} from 'vue';
     import { useDate } from 'vuetify'
-    import { useTareaStore } from '@/stores/TareaStore';
+   
     import NuevaTarea from './NuevaTarea.vue';
+    import Comentarios from './Comentarios.vue';
+
+    import { useTareaStore } from '@/stores/TareaStore';
     const storeTareas = useTareaStore();
+
+    import { useComentarioStore } from '@/stores/ComentarioStore';
+    const storeComentario = useComentarioStore();
 
     const nuevo=()=>{
         var tarea={ 
@@ -165,8 +172,9 @@
         storeTareas.nuevaTarea=true;
     }
     const comentarios=(item)=>{
-        storeTareas.tarea=item;
-        storeTareas.nuevaTarea=true;
+        storeComentario.tarea=item;
+        storeComentario.getComentarios();
+        storeComentario.visible=true;
     }
     const documentos=(item)=>{
         storeTareas.tarea=item;

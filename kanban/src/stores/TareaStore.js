@@ -129,7 +129,7 @@ export const useTareaStore=defineStore('tareaStore',{
         },
 
         addTarea(){
-            console.log(JSON.stringify(this.tarea));
+            //console.log(JSON.stringify(this.tarea));
 
             const requestOptions = {
                 method: 'POST',
