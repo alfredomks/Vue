@@ -147,7 +147,7 @@ export const useTareaStore=defineStore('tareaStore',{
                     const error = (data && data.message) || response.status;
                     return Promise.reject(error);
                   }
-            
+                  this.get_lista_tareas();
                   this.postId = data.id;
                 })
                 .catch(error => {

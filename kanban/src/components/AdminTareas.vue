@@ -143,6 +143,7 @@
             </v-card>
     <NuevaTarea></NuevaTarea>
     <Comentarios></Comentarios>
+    <DialogoConfirmacion></DialogoConfirmacion>
 </template>
 
 <script setup>
@@ -151,12 +152,16 @@
    
     import NuevaTarea from './NuevaTarea.vue';
     import Comentarios from './Comentarios.vue';
+    import DialogoConfirmacion from './DialogoConfirmacion.vue';
 
     import { useTareaStore } from '@/stores/TareaStore';
     const storeTareas = useTareaStore();
 
     import { useComentarioStore } from '@/stores/ComentarioStore';
     const storeComentario = useComentarioStore();
+
+    import { useDialogoConfirmaStore } from '@/stores/DialogoConfirmacion';
+    const storeDialogoConfirma = useDialogoConfirmaStore();
 
     const nuevo=()=>{
         var tarea={ 
@@ -187,8 +192,12 @@
         storeTareas.tarea=item;
         storeTareas.nuevaTarea=true;
     }
-    const  eliminar= (item)=>{
-         storeTareas.deleteTarea(item);
+    const  eliminar= async (item)=>{
+        const confirmado = await storeDialogoConfirma.solicitarConfirmacion('¿Está seguro que desea eliminar el registro?');
+        console.log("confirmado:"+confirmado);
+        if (confirmado) {
+            storeTareas.deleteTarea(item)
+        }
     }
 
     const paginaSiguiente=()=>{
