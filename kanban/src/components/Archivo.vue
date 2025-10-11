@@ -1,7 +1,7 @@
 <template>
     <v-dialog max-width="500"
               persistent
-              v-model="storeTarea.nuevaTarea">
+              v-model="storeArchivo.visible">
         <v-card  elevation="12" title="Tarea">
                 <template v-slot:prepend>
                         <v-avatar color="primary">
@@ -12,23 +12,13 @@
                  <v-divider></v-divider>
                  
                  <v-card-text>
-                    <v-text-field clearable label="Nombre" v-model="storeTarea.tarea.nombre">
+                    <v-text-field clearable label="Nombre" v-model="storeArchivo.archivo.nombre">
                     </v-text-field>
                     <v-combobox
                             clearable
-                            label="Padre"
-                            v-model="storeTarea.tarea.padre"
-                            :items="storeTarea.lista_tareas"
-                            item-value="id"
-                            item-title="nombre"
-                            :return-object="false"
-                            >
-                    </v-combobox>
-                    <v-combobox
-                            clearable
                             label="Tipo"
-                            v-model="storeTarea.tarea.tipo"
-                            :items="storeTarea.lista_tipos"
+                            v-model="storeArchivo.archivo.tipo"
+                            :items="storeArchivo.lista_tipos"
                             item-value="id"
                             item-title="nombre"
                             :return-object="false"
@@ -38,8 +28,8 @@
                     <v-combobox
                             clearable
                             label="Estado"
-                            v-model="storeTarea.tarea.estado"
-                            :items="storeTarea.lista_estados"
+                            v-model="storeArchivo.archivo.estado"
+                            :items="storeArchivo.lista_estados"
                             item-value="id"
                             item-title="nombre"
                             :return-object="false"
@@ -48,8 +38,8 @@
                     <v-combobox
                             clearable
                             label="Responsable"
-                            v-model="storeTarea.tarea.usuario"
-                            :items="storeTarea.lista_usuarios"
+                            v-model="storeArchivo.archivo.usuario"
+                            :items="storeArchivo.lista_usuarios"
                             item-value="id"
                             item-title="nombre"
                             :return-object="false"
@@ -69,7 +59,7 @@
                         rounded="xl">
                     Guardar
                 </v-btn>
-                <v-btn @click="storeTarea.nuevaTarea = false" 
+                <v-btn @click="storeArchivo.visible = false" 
                         elevation="12"  
                         prepend-icon="mdi mdi-close-circle"
                         color="error"
@@ -83,11 +73,11 @@
 </template>
 
 <script setup>
-    import { useTareaStore } from '@/stores/TareaStore';
-    const storeTarea = useTareaStore();
+    import { useArchivoStore } from '@/stores/AarchivoStore';
+    const storeArchivo = useArchivoStore();
 
     const guardar=()=>{
-        storeTarea.addTarea();
-        storeTarea.nuevaTarea=false;
+        storeArchivo.addArchivo();
+        storeArchivo.visible=false;
     }
 </script>

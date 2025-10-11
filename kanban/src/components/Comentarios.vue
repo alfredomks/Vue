@@ -109,15 +109,25 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+    <DialogoConfirmacion></DialogoConfirmacion>
 </template>
 
 <script setup>
+
+    import DialogoConfirmacion from './DialogoConfirmacion.vue';
     import { useComentarioStore } from '@/stores/ComentarioStore';
     const storeComentario = useComentarioStore();
+
+    import { useDialogoConfirmaStore } from '@/stores/DialogoConfirmacion';
+    const storeDialogoConfirma = useDialogoConfirmaStore();
+
     const guardar=()=>{
         storeComentario.addComentario();
     }
-    const eliminar=(item)=>{
-        storeComentario.delteComentario(item);
+    const eliminar= async (item)=>{
+        const confirmado = await storeDialogoConfirma.solicitarConfirmacion('¿Está seguro que desea eliminar el registro?');
+        if (confirmado) {
+            storeComentario.delteComentario(item);
+        }
     }
 </script>

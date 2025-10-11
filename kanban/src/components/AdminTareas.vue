@@ -47,7 +47,7 @@
 
                     <div class="container">
                         <div class="center">
-                            <v-tooltip text="Nuevo producto">
+                            <v-tooltip text="Nueva tarea">
                                 <template v-slot:activator="{ props }">
                                     <v-btn  v-bind="props" 
                                             prepend-icon="mdi-plus-circle" 
@@ -144,6 +144,7 @@
     <NuevaTarea></NuevaTarea>
     <Comentarios></Comentarios>
     <DialogoConfirmacion></DialogoConfirmacion>
+    <Archivo></Archivo>
 </template>
 
 <script setup>
@@ -153,6 +154,7 @@
     import NuevaTarea from './NuevaTarea.vue';
     import Comentarios from './Comentarios.vue';
     import DialogoConfirmacion from './DialogoConfirmacion.vue';
+    import Archivo from './Archivo.vue';
 
     import { useTareaStore } from '@/stores/TareaStore';
     const storeTareas = useTareaStore();
@@ -162,6 +164,9 @@
 
     import { useDialogoConfirmaStore } from '@/stores/DialogoConfirmacion';
     const storeDialogoConfirma = useDialogoConfirmaStore();
+
+    import { useArchivoStore } from '@/stores/AarchivoStore';
+    const storeArchivo = useArchivoStore();
 
     const nuevo=()=>{
         var tarea={ 
@@ -182,8 +187,14 @@
         storeComentario.visible=true;
     }
     const documentos=(item)=>{
-        storeTareas.tarea=item;
-        storeTareas.nuevaTarea=true;
+        var archivo={ 
+                "id":null,
+                "codigo_documento":null,  
+                "descripcion":null,
+                "fecha":new Date()
+            };
+        storeArchivo.archivo=item;
+        storeArchivo.visible=true;
     }
     const buscar=()=>{
         console.log('Buscar tareas');
@@ -194,7 +205,6 @@
     }
     const  eliminar= async (item)=>{
         const confirmado = await storeDialogoConfirma.solicitarConfirmacion('¿Está seguro que desea eliminar el registro?');
-        console.log("confirmado:"+confirmado);
         if (confirmado) {
             storeTareas.deleteTarea(item)
         }
