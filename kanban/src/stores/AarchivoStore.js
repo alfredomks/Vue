@@ -4,6 +4,7 @@ export const useArchivoStore=defineStore('AarchivoStore',{
     state:()=>({
         visible:false,
         archivo:null,
+        tarea:null,
         pagina:1,
         numero_paginas:0,
         str_comentario:null,
@@ -36,17 +37,12 @@ export const useArchivoStore=defineStore('AarchivoStore',{
         },
         
         addArchivo(){
-            //console.log(this.str_comentario);
-            var nuevo_comentario={
-                "comentario":this.str_comentario,
-                "usuario":this.tarea.id,
-                "fecha":new Date()
-            };
+            console.log(this.archivo);
 
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(nuevo_comentario)
+                body: JSON.stringify(this.archivo)
               };
               
               fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/documentos/'+this.tarea.id, requestOptions)
@@ -60,7 +56,7 @@ export const useArchivoStore=defineStore('AarchivoStore',{
                   }
                   
                   this.postId = data.id;
-                  this.getComentarios();
+                  this.getArchivos();
                 })
                 .catch(error => {
                   this.errorMessage = error;
@@ -94,7 +90,7 @@ export const useArchivoStore=defineStore('AarchivoStore',{
             .then(data => {
                 // Process the successful response data
                 console.log('Resource deleted successfully:', data);
-                this.getComentarios();
+                this.getArchivos();
                 // Update Vue component state, e.g., remove the item from a list
             })
             .catch(error => {

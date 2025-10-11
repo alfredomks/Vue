@@ -193,7 +193,8 @@
                 "descripcion":null,
                 "fecha":new Date()
             };
-        storeArchivo.archivo=item;
+        storeArchivo.archivo=archivo;
+        storeArchivo.tarea=item;
         storeArchivo.visible=true;
     }
     const buscar=()=>{

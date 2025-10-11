@@ -2,7 +2,7 @@
     <v-dialog max-width="500"
               persistent
               v-model="storeArchivo.visible">
-        <v-card  elevation="12" title="Tarea">
+        <v-card  elevation="12" title="Archivo">
                 <template v-slot:prepend>
                         <v-avatar color="primary">
                             <v-icon icon="mdi-calendar-check"></v-icon>
@@ -12,39 +12,12 @@
                  <v-divider></v-divider>
                  
                  <v-card-text>
-                    <v-text-field clearable label="Nombre" v-model="storeArchivo.archivo.nombre">
+                    <v-text-field clearable label="Código" v-model="storeArchivo.archivo.codigo_documento">
                     </v-text-field>
-                    <v-combobox
-                            clearable
-                            label="Tipo"
-                            v-model="storeArchivo.archivo.tipo"
-                            :items="storeArchivo.lista_tipos"
-                            item-value="id"
-                            item-title="nombre"
-                            :return-object="false"
-                            >
-                    </v-combobox>
-                    
-                    <v-combobox
-                            clearable
-                            label="Estado"
-                            v-model="storeArchivo.archivo.estado"
-                            :items="storeArchivo.lista_estados"
-                            item-value="id"
-                            item-title="nombre"
-                            :return-object="false"
-                            >
-                    </v-combobox>
-                    <v-combobox
-                            clearable
-                            label="Responsable"
-                            v-model="storeArchivo.archivo.usuario"
-                            :items="storeArchivo.lista_usuarios"
-                            item-value="id"
-                            item-title="nombre"
-                            :return-object="false"
-                            >
-                    </v-combobox>
+                   
+                    <v-text-field clearable label="Descripción" v-model="storeArchivo.archivo.descripcion">
+                    </v-text-field>
+
                  </v-card-text>
             
             <v-divider></v-divider>
