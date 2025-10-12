@@ -1,45 +1,5 @@
 <template>
     <div>
-        <v-sheet
-        elevation="24"
-        border
-        min-height="30"
-        width="95%"
-        rounded="lg"
-        >
-             <v-row
-                no-gutters
-                class="justificar"
-             >
-             <v-combobox
-                            clearable
-                            label="Tipo"
-                            v-model="storeTarea.tipos"
-                            :items="storeTarea.lista_tipos"
-                            item-value="id"
-                            item-title="nombre"
-                            :return-object="true"
-                            chips
-                            hide-selected
-                            multiple
-                            >
-                    </v-combobox>
-                    <v-combobox
-                            clearable
-                            label="Fase"
-                            v-model="storeTarea.fases"
-                            :items="storeTarea.lista_fases"
-                            item-value="id"
-                            item-title="nombre"
-                            :return-object="true"
-                            chips
-                            hide-selected
-                            multiple
-                            >
-                    </v-combobox>
-              
-            </v-row>
-        </v-sheet>
 
         <v-row
                 align="center"

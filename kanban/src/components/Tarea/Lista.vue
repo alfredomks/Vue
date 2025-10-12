@@ -62,9 +62,11 @@
         var valido=false;
         //console.log(storeTarea.tipo);
         if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) 
-            //&&  storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.tipo) 
-           // && (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
-           //  tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase()))
+            //&&  storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.str_tipo) 
+            && (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
+                tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase()) ||
+                tarea.str_tipo.toLowerCase().includes(txt_buscar.value.toLowerCase())
+                )
             ){
                 valido=true;
             }
@@ -85,8 +87,8 @@
         var numero=0;
         for (let i = 0; i < storeTarea.lista_tareas.length; i++) {
            var t=storeTarea.lista_tareas[i];
-           if( storeTarea.lista_tipos.find(({ nombre }) => nombre === t.tipo) &&
-               storeTarea.lista_fases.find(({ nombre }) => nombre === t.fase) 
+           if( storeTarea.lista_tipos.find(({ nombre }) => nombre === t.str_tipo) &&
+               storeTarea.lista_estados.find(({ nombre }) => nombre === t.str_estado) 
             ){
             numero++;
            }
@@ -114,7 +116,7 @@
     const handleDrop=(index)=>{
         //console.log(storeTarea.tareaSeleccionada);
         if(storeTarea.tareaSeleccionada!=null){
-            storeTarea.tareaSeleccionada.estado=props.tipo;
+            storeTarea.tareaSeleccionada.str_estado=props.tipo;
         }
         const dropItem=storeTarea.lista_tareas.splice(dragedItem.value,1)[0];
         storeTarea.lista_tareas.splice(index,0,dropItem)
