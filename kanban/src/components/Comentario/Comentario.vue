@@ -7,7 +7,7 @@
                     <h4>Hitórico</h4>
                  </v-card-title>
                  <v-card-subtitle>
-                    <h4>Tarea</h4>
+                    <h4>{{storeComentario.tarea.nombre}}</h4>
                  </v-card-subtitle>
                 
                  <v-divider></v-divider>

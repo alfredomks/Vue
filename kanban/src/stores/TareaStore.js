@@ -78,7 +78,7 @@ export const useTareaStore=defineStore('tareaStore',{
         
     },
     actions:{
-        get_lista_tipos(){
+       async get_lista_tipos(){
             fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/catalogos/getPorGrupo?grupo=2')
             .then(response => response.json())
             .then(data => {
@@ -90,7 +90,7 @@ export const useTareaStore=defineStore('tareaStore',{
             });
         },
 
-        get_lista_estados(){
+        async  get_lista_estados(){
             fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/catalogos/getPorGrupo?grupo=12')
             .then(response => response.json())
             .then(data => {
@@ -102,7 +102,7 @@ export const useTareaStore=defineStore('tareaStore',{
             });
         },
 
-        get_lista_usuarios(){
+        async get_lista_usuarios(){
             fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/catalogos/getPorGrupo?grupo=16')
             .then(response => response.json())
             .then(data => {
@@ -114,7 +114,7 @@ export const useTareaStore=defineStore('tareaStore',{
             });
         },
         
-        get_lista_tareas(){
+        async get_lista_tareas(){
             var pagina=this.pagina-1;
             fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page='+pagina+'&size=10')
             .then(response => response.json())
@@ -128,7 +128,7 @@ export const useTareaStore=defineStore('tareaStore',{
             });
         },
 
-        addTarea(){
+        async addTarea(){
             //console.log(JSON.stringify(this.tarea));
 
             const requestOptions = {

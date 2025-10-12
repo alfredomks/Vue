@@ -60,8 +60,9 @@
     
     const validarTarea=(tarea)=>{
         var valido=false;
-        //console.log(storeTarea.tipo);
-        if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) 
+        //console.log(tarea);
+        if(tarea.str_estado!=null){
+            if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) 
             //&&  storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.str_tipo) 
             && (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
                 tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase()) ||
@@ -70,6 +71,7 @@
             ){
                 valido=true;
             }
+        }
         return valido;
     }
 

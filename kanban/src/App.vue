@@ -101,8 +101,8 @@
   }
 
   const tablero=()=>{
-    storeTarea.get_lista_tipos();
     storeTarea.get_lista_estados();
+    storeTarea.get_lista_tipos();
     storeTarea.get_lista_usuarios();
     storeTarea.get_lista_tareas();
     storeTarea.bol_visible=false;
