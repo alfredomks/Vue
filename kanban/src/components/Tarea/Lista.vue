@@ -108,7 +108,7 @@
     }
     const handleDragStart=(index)=>{       
         dragedItem.value=index;
-        storeTarea.setTareaSeleccionada(storeTarea.lista_tareas[index]);
+        storeTarea.tarea=storeTarea.lista_tareas[index];
     }
 
     const handleDragOver=(event)=>{
@@ -116,13 +116,14 @@
     }
 
     const handleDrop=(index)=>{
-        //console.log(storeTarea.tareaSeleccionada);
-        if(storeTarea.tareaSeleccionada!=null){
-            storeTarea.tareaSeleccionada.str_estado=props.tipo.nombre;
-            storeTarea.tareaSeleccionada.estado=props.tipo.id;
+        //console.log(storeTarea.tarea);
+        if(storeTarea.tarea!=null){
+            storeTarea.tarea.str_estado=props.tipo.nombre;
+            storeTarea.tarea.estado=props.tipo.id;
+            storeTarea.addTarea();
         }
-        const dropItem=storeTarea.lista_tareas.splice(dragedItem.value,1)[0];
-        storeTarea.lista_tareas.splice(index,0,dropItem)
+        //const dropItem=storeTarea.lista_tareas.splice(dragedItem.value,1)[0];
+        //storeTarea.lista_tareas.splice(index,0,dropItem)
         dragedItem.value=0;
         props.tarea=null;
     }
