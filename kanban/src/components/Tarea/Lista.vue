@@ -12,7 +12,7 @@
                         <v-progress-circular :model-value="getPorcentaje()" :size="45" :width="5">
                             <h4>{{ getPorcentaje() }}</h4> 
                         </v-progress-circular>
-                        {{ tipo }}                
+                        {{ tipo.nombre }}                
                     </h3>
                 </v-badge>
                 <v-spacer></v-spacer>
@@ -62,7 +62,7 @@
         var valido=false;
         //console.log(tarea);
         if(tarea.str_estado!=null){
-            if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) 
+            if( tarea.str_estado.toLowerCase().includes(props.tipo.nombre.toLowerCase()) 
             //&&  storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.str_tipo) 
             && (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
                 tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase()) ||
@@ -118,7 +118,8 @@
     const handleDrop=(index)=>{
         //console.log(storeTarea.tareaSeleccionada);
         if(storeTarea.tareaSeleccionada!=null){
-            storeTarea.tareaSeleccionada.str_estado=props.tipo;
+            storeTarea.tareaSeleccionada.str_estado=props.tipo.nombre;
+            storeTarea.tareaSeleccionada.estado=props.tipo.id;
         }
         const dropItem=storeTarea.lista_tareas.splice(dragedItem.value,1)[0];
         storeTarea.lista_tareas.splice(index,0,dropItem)

@@ -128,6 +128,19 @@ export const useTareaStore=defineStore('tareaStore',{
             });
         },
 
+        async get_all_tareas(){
+            var pagina=this.pagina-1;
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page='+pagina+'&size=500')
+            .then(response => response.json())
+            .then(data => {
+                this.numero_paginas=data.totalPages;
+                this.lista_tareas=data.content;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        },
         async addTarea(){
             //console.log(JSON.stringify(this.tarea));
 

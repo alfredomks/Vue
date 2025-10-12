@@ -10,7 +10,7 @@
             <v-col cols="6"
                     sm="4" 
                     v-for="item,index in storeTarea.lista_estados" :key="index">
-                <Lista class="ma-2 pa-2" :tipo="item.nombre" ></Lista>
+                <Lista class="ma-2 pa-2" :tipo="item" ></Lista>
             </v-col>
         </v-row>
     </div>
