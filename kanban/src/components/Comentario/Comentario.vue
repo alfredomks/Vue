@@ -1,7 +1,7 @@
 <template>
     <v-dialog max-width="500"
               persistent
-              v-model="storeLog.visible">
+              v-model="storeComentario.visible">
         <v-card  elevation="12">
                  <v-card-title class="bg-surface-light pt-4">
                     <h4>Hitórico</h4>
@@ -15,7 +15,7 @@
                  <v-card-text>
                     <v-timeline  align="start" side="end">
                         <v-timeline-item
-                        v-for="item,index in storeLog.lista_log" 
+                        v-for="item,index in storeComentario.lista_comentarios" 
                         :key="index"
                         :dot-color="item.color"
                         size="small"
@@ -43,7 +43,7 @@
 
             <v-card-actions class="bg-surface-light pt-4">
                 <v-spacer></v-spacer>
-                <v-btn @click="storeLog.visible = false" 
+                <v-btn @click="storeComentario.visible = false" 
                         elevation="12"  
                         prepend-icon="mdi mdi-close-circle" 
                         color="error"
@@ -57,6 +57,6 @@
 </template>
 
 <script setup>
-    import { useLogStore } from '@/stores/LogStore';
-    const storeLog = useLogStore();
+    import { useComentarioStore } from '@/stores/ComentarioStore';
+    const storeComentario = useComentarioStore();
 </script>

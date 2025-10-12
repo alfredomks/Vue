@@ -16,7 +16,7 @@
                                     label="Tipo"
                                     item-title="str_nombre"
                                     item-value="int_id"
-                                    :items="storeTareas.lista_filtros"
+                                    :items="storeTarea.lista_filtros"
                                     >
                                     </v-autocomplete>
                                     
@@ -66,8 +66,8 @@
 
                 <v-card-text>
                     <v-data-table 
-                        :headers="storeTareas.cabecera_lista"
-                        :items="storeTareas.lista_tareas"
+                        :headers="storeTarea.cabecera_lista"
+                        :items="storeTarea.lista_tareas"
                         hide-default-footer
                         >
                         <template v-slot:item.actions="{item }">
@@ -130,19 +130,19 @@
                 
                 <div class="text-center pt-2">
                         <v-pagination
-                            v-model="storeTareas.pagina"
-                            :length="storeTareas.numero_paginas"
+                            v-model="storeTarea.pagina"
+                            :length="storeTarea.numero_paginas"
                             :total-visible="10"
                             rounded="circle"
                             color="primary"
                             @next="paginaSiguiente"
                             @prev="paginaAnterior"
-                            @click="storeTareas.get_lista_tareas()"
+                            @click="storeTarea.get_lista_tareas()"
                         ></v-pagination>
                 </div>
             </v-card>
     <NuevaTarea></NuevaTarea>
-    <Comentarios></Comentarios>
+    <AdminComentarios></AdminComentarios>
     <DialogoConfirmacion></DialogoConfirmacion>
     <Archivo></Archivo>
 </template>
@@ -152,12 +152,12 @@
     import { useDate } from 'vuetify'
    
     import NuevaTarea from './NuevaTarea.vue';
-    import Comentario from '../Comentario/Comentario.vue';
+    import AdminComentarios from '../Comentario/AdminComentarios.vue';
     import DialogoConfirmacion from '../Dialogos/DialogoConfirmacion.vue';
     import Archivo from '../Documento/Archivo.vue';
 
     import { useTareaStore } from '@/stores/TareaStore';
-    const storeTareas = useTareaStore();
+    const storeTarea = useTareaStore();
 
     import { useComentarioStore } from '@/stores/ComentarioStore';
     const storeComentario = useComentarioStore();
@@ -178,8 +178,8 @@
                 "descripcion":null,
                 "fecha_crea":new Date()
             };
-        storeTareas.tarea=tarea;
-        storeTareas.nuevaTarea=true;
+        storeTarea.tarea=tarea;
+        storeTarea.nuevaTarea=true;
     }
     const comentarios=(item)=>{
         storeComentario.tarea=item;
@@ -201,20 +201,20 @@
         console.log('Buscar tareas');
     }
     const editar=(item)=>{
-        storeTareas.tarea=item;
-        storeTareas.nuevaTarea=true;
+        storeTarea.tarea=item;
+        storeTarea.nuevaTarea=true;
     }
     const  eliminar= async (item)=>{
         const confirmado = await storeDialogoConfirma.solicitarConfirmacion('¿Está seguro que desea eliminar el registro?');
         if (confirmado) {
-            storeTareas.deleteTarea(item)
+            storeTarea.deleteTarea(item)
         }
     }
 
     const paginaSiguiente=()=>{
-        storeTareas.get_lista_tareas();
+        storeTarea.get_lista_tareas();
     }
     const paginaAnterior=()=>{
-        storeTareas.get_lista_tareas();
+        storeTarea.get_lista_tareas();
     }
 </script>

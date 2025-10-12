@@ -28,7 +28,7 @@
 
                     <div class="container">
                         <v-btn  density="comfortable"
-                                @click="storeLog.visible = true"
+                                @click="comentarios"
                                 icon="mdi mdi-comment-text-multiple-outline">
                         </v-btn>
                         <v-btn  density="comfortable"
@@ -37,7 +37,7 @@
                         </v-btn>
                         <v-spacer></v-spacer>
                         <v-btn  density="comfortable"
-                                @click="eliminarTarea()"
+                                @click="eliminar()"
                                 icon="mdi mdi-delete-circle-outline">
                         </v-btn>
                     </div>
@@ -47,23 +47,32 @@
            
         </template>
     </v-hover>
-    
-    <Log></Log>
+    <DialogoConfirmacion></DialogoConfirmacion>
 </template>
 
-<script setup>
+<script setup> 
     import { useTareaStore } from '@/stores/TareaStore';
-    import { useLogStore } from '@/stores/LogStore';
-    const storeTarea = useTareaStore();
-    const storeLog = useLogStore();
+    import { useDialogoConfirmaStore } from '@/stores/DialogoConfirmacion';
+    import { useComentarioStore } from '@/stores/ComentarioStore';
     
+    const storeDialogoConfirma = useDialogoConfirmaStore();
+    const storeTarea = useTareaStore();
+    const storeComentario = useComentarioStore();
+
     const props = defineProps(['tarea']);
 
-    const eliminarTarea=()=>{
-        const index = storeTarea.lista_tareas.indexOf(props.tarea);
-        if (index > -1) {
-            storeTarea.lista_tareas.splice(index, 1);
+    const  eliminar= async ()=>{
+        var objeto=toRaw(props.tarea);
+        const confirmado = await storeDialogoConfirma.solicitarConfirmacion('¿Está seguro que desea eliminar el registro?');
+        if (confirmado) {
+            storeTarea.deleteTarea(objeto);
         }
+    }
+    const comentarios=()=>{
+        var objeto=toRaw(props.tarea);
+        storeComentario.tarea=objeto;
+        storeComentario.getComentarios();
+        storeComentario.visible=true;
     }
 </script>
 <style>

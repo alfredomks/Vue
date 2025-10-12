@@ -134,15 +134,14 @@
     }
 
     const nuevaTarea=()=>{
-        var i=storeTarea.lista_tareas.length+1;
         var tarea={ 
-                "id":i,
-                "nombre":null,     
+                "id":null,
+                "nombre":null,  
                 "tipo":null,
-                "fase":null,
-                "estado":props.tipo,
+                "estado":null,
                 "usuario":null,
-                "descripcion":null
+                "descripcion":null,
+                "fecha_crea":new Date()
             };
         storeTarea.tarea=tarea;
         storeTarea.nuevaTarea=true;

@@ -14,11 +14,14 @@
             </v-col>
         </v-row>
     </div>
+    <Comentario></Comentario>
 </template>
 
 <script setup>
     import {computed, ref} from 'vue';
     import { useTareaStore } from '@/stores/TareaStore';
+    
+    import Comentario from '../Comentario/Comentario.vue';
     const storeTarea = useTareaStore();
     const toggle=null;
 </script>
