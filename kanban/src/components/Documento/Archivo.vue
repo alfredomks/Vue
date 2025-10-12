@@ -12,9 +12,8 @@
                  <v-divider></v-divider>
                  
                  <v-card-text>
-                    <v-text-field clearable label="Código" v-model="storeArchivo.archivo.codigo_documento">
-                    </v-text-field>
-                   
+
+                    <v-file-input clearable label="Archivo"  show-size accept="image/*" v-model="archivo" </v-file-input>
                     <v-text-field clearable label="Descripción" v-model="storeArchivo.archivo.descripcion">
                     </v-text-field>
 
@@ -48,9 +47,41 @@
 <script setup>
     import { useArchivoStore } from '@/stores/AarchivoStore';
     const storeArchivo = useArchivoStore();
+    const archivo = ref(null);
 
-    const guardar=()=>{
-        storeArchivo.addArchivo();
-        storeArchivo.visible=false;
+    const guardar= async ()=>{
+        if (archivo.value) {
+            storeArchivo.archivo.contenido= await obtenerBase64(archivo.value);
+            storeArchivo.archivo.nombre=archivo.value.name;
+            storeArchivo.addArchivo();
+            storeArchivo.visible=false;
+        }
     }
+    
+    const obtenerArrayDeBytes = async (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+
+            reader.onload = () => {
+            const arrayBuffer = reader.result
+            const byteArray = new Uint8Array(arrayBuffer)
+            resolve(byteArray)
+            }
+
+            reader.onerror = () => {
+            reject(new Error("Error al leer el archivo"))
+            }
+
+            reader.readAsArrayBuffer(file)
+        })
+    }
+
+    const obtenerBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = () => reject(new Error("Error al leer el archivo"))
+            reader.readAsDataURL(file)
+    })
+}
 </script>

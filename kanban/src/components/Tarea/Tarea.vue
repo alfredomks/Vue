@@ -17,10 +17,9 @@
                     <v-divider  class="border-opacity-70" color="black"></v-divider>
 
                     <p>
-                        <b>Tipo:</b> {{ tarea.tipo }} <br>
-                        <b>Fase:</b> {{ tarea.fase }} <br>
-                        <b>Estado:</b> {{ tarea.estado }} <br>
-                        <b>Usuario:</b> {{ tarea.usuario }} <br>
+                        <b>Tipo:</b> {{ tarea.str_tipo }} <br>
+                        <b>Estado:</b> {{ tarea.str_estado }} <br>
+                        <b>Usuario:</b> {{ tarea.str_usuario }} <br>
                         <b>Dscripción:</b> {{ tarea.descripcion }}
                     </p>
                    

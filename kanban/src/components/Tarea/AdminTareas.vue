@@ -152,9 +152,9 @@
     import { useDate } from 'vuetify'
    
     import NuevaTarea from './NuevaTarea.vue';
-    import Comentarios from './Comentarios.vue';
-    import DialogoConfirmacion from './DialogoConfirmacion.vue';
-    import Archivo from './Archivo.vue';
+    import Comentario from '../Comentario/Comentario.vue';
+    import DialogoConfirmacion from '../Dialogos/DialogoConfirmacion.vue';
+    import Archivo from '../Documento/Archivo.vue';
 
     import { useTareaStore } from '@/stores/TareaStore';
     const storeTareas = useTareaStore();

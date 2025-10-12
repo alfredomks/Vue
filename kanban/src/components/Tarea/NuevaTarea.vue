@@ -14,6 +14,8 @@
                  <v-card-text>
                     <v-text-field clearable label="Nombre" v-model="storeTarea.tarea.nombre">
                     </v-text-field>
+                    <v-text-field clearable label="Descripción" v-model="storeTarea.tarea.descripcion">
+                    </v-text-field>
                     <v-combobox
                             clearable
                             label="Padre"

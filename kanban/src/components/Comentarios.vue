@@ -114,7 +114,7 @@
 
 <script setup>
 
-    import DialogoConfirmacion from './DialogoConfirmacion.vue';
+    import DialogoConfirmacion from './Dialogos/DialogoConfirmacion.vue';
     import { useComentarioStore } from '@/stores/ComentarioStore';
     const storeComentario = useComentarioStore();
 

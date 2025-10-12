@@ -80,8 +80,8 @@
 
 <script setup>
   import { ref } from 'vue'
-  import Tablero from './components/Tablero.vue'
-  import AdminTareas from './components/AdminTareas.vue';
+  import Tablero from './components/Tarea/Tablero.vue'
+  import AdminTareas from './components/Tarea/AdminTareas.vue';
 
   import { useMenuStore } from './stores/MenuStore'; 
   import { useTareaStore } from './stores/TareaStore'; 

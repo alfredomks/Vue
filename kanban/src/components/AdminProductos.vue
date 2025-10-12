@@ -196,7 +196,7 @@
     
     import AdminObjetivos from './AdminObjetivos.vue';
     import AdminRecuros from './AdminRecursos.vue';
-    import AdminTareas from './AdminTareas.vue';
+    import AdminTareas from './Tarea/AdminTareas.vue';
     import AdminSprints from './AdminSprints.vue';
 
     const storeProducto = useProductoStore();

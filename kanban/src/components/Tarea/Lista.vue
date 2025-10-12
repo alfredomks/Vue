@@ -61,11 +61,11 @@
     const validarTarea=(tarea)=>{
         var valido=false;
         //console.log(storeTarea.tipo);
-        if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) && 
-            storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.tipo) &&
-            (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
-             tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase())
-            )){
+        if( tarea.str_estado.toLowerCase().includes(props.tipo.toLowerCase()) 
+            //&&  storeTarea.lista_tipos.find(({ nombre }) => nombre === tarea.tipo) 
+           // && (tarea.nombre.toLowerCase().includes(txt_buscar.value.toLowerCase()) || 
+           //  tarea.str_usuario.toLowerCase().includes(txt_buscar.value.toLowerCase()))
+            ){
                 valido=true;
             }
         return valido;
