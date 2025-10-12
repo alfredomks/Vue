@@ -15,6 +15,7 @@
         </v-row>
     </div>
     <Comentario></Comentario>
+    <DialogoConfirmacion></DialogoConfirmacion>
 </template>
 
 <script setup>
@@ -22,6 +23,8 @@
     import { useTareaStore } from '@/stores/TareaStore';
     
     import Comentario from '../Comentario/Comentario.vue';
+    import DialogoConfirmacion from '../Dialogos/DialogoConfirmacion.vue';
+
     const storeTarea = useTareaStore();
     const toggle=null;
 </script>

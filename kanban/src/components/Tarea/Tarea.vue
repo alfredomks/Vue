@@ -43,11 +43,8 @@
                     </div>
                 </div>
             </v-sheet>
-            
-           
         </template>
     </v-hover>
-    <DialogoConfirmacion></DialogoConfirmacion>
 </template>
 
 <script setup> 
@@ -63,6 +60,7 @@
 
     const  eliminar= async ()=>{
         var objeto=toRaw(props.tarea);
+        //console.log(objeto);
         const confirmado = await storeDialogoConfirma.solicitarConfirmacion('¿Está seguro que desea eliminar el registro?');
         if (confirmado) {
             storeTarea.deleteTarea(objeto);
