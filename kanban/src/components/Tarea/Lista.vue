@@ -46,7 +46,6 @@
                </div>
                 
         </container>
-        <NuevaTarea></NuevaTarea>
     </v-card> 
 </template>
 

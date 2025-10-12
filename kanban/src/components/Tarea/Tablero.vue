@@ -14,6 +14,7 @@
             </v-col>
         </v-row>
     </div>
+    <NuevaTarea></NuevaTarea>
     <Comentario></Comentario>
     <DialogoConfirmacion></DialogoConfirmacion>
 </template>
@@ -22,6 +23,7 @@
     import {computed, ref} from 'vue';
     import { useTareaStore } from '@/stores/TareaStore';
     
+    import NuevaTarea from './NuevaTarea.vue';
     import Comentario from '../Comentario/Comentario.vue';
     import DialogoConfirmacion from '../Dialogos/DialogoConfirmacion.vue';
 
