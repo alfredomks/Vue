@@ -5,7 +5,7 @@
         <v-card  elevation="12" title="Archivo">
                 <template v-slot:prepend>
                         <v-avatar color="primary">
-                            <v-icon icon="mdi-calendar-check"></v-icon>
+                            <v-icon icon="mdi mdi-folder-file"></v-icon>
                         </v-avatar>
                 </template>
                  
@@ -14,7 +14,7 @@
                  <v-card-text>
 
                     <v-file-input clearable label="Archivo"  show-size accept="image/*" v-model="archivo" </v-file-input>
-                    <v-text-field clearable label="Descripción" v-model="storeArchivo.archivo.descripcion">
+                    <v-text-field clearable label="Descripción" v-model="storeArchivo.documento.descripcion">
                     </v-text-field>
 
                  </v-card-text>
@@ -51,8 +51,8 @@
 
     const guardar= async ()=>{
         if (archivo.value) {
-            storeArchivo.archivo.contenido= await obtenerBase64(archivo.value);
-            storeArchivo.archivo.nombre=archivo.value.name;
+            storeArchivo.documento.archivo= await obtenerBase64(archivo.value);
+            storeArchivo.documento.nombre=archivo.value.name;
             storeArchivo.addArchivo();
             storeArchivo.visible=false;
         }
@@ -79,7 +79,7 @@
     const obtenerBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader()
-            reader.onload = () => resolve(reader.result)
+            reader.onload = () => resolve(reader.result.split(',')[1])
             reader.onerror = () => reject(new Error("Error al leer el archivo"))
             reader.readAsDataURL(file)
     })

@@ -187,13 +187,14 @@
         storeComentario.visible=true;
     }
     const documentos=(item)=>{
-        var archivo={ 
+        var documento={ 
                 "id":null,
-                "codigo_documento":null,  
+                "nombre":null,  
                 "descripcion":null,
+                "archivo":null,
                 "fecha":new Date()
             };
-        storeArchivo.archivo=archivo;
+        storeArchivo.documento=documento;
         storeArchivo.tarea=item;
         storeArchivo.visible=true;
     }

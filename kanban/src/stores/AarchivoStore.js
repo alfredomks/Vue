@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useArchivoStore=defineStore('AarchivoStore',{
     state:()=>({
         visible:false,
-        archivo:null,
+        documento:null,
         tarea:null,
         pagina:1,
         numero_paginas:0,
@@ -37,12 +37,16 @@ export const useArchivoStore=defineStore('AarchivoStore',{
         },
         
         addArchivo(){
-            console.log(this.archivo);
+            
+            const formData = new FormData();
+            formData.append("nombre", this.documento.nombre);
+            formData.append("descripcion", this.documento.descripcion);
+            formData.append("file", this.documento.archivo);
 
             const requestOptions = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.archivo)
+                //headers: { 'Content-Type': 'application/json' },
+                body: formData
               };
               
               fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/documentos/'+this.tarea.id, requestOptions)
