@@ -92,6 +92,7 @@
   const theme = ref('light')
 
   const tareas=()=>{
+    storeTarea.numero_filas=10;
     storeTarea.get_lista_tipos();
     storeTarea.get_lista_estados();
     storeTarea.get_lista_usuarios();
@@ -101,10 +102,11 @@
   }
 
   const tablero=()=>{
+    storeTarea.numero_filas=1000;
     storeTarea.get_lista_estados();
     storeTarea.get_lista_tipos();
     storeTarea.get_lista_usuarios();
-    storeTarea.get_all_tareas();
+    storeTarea.get_lista_tareas();
     storeTarea.bol_visible=false;
     storeTarea.bol_tablero=true;
   }

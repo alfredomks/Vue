@@ -28,6 +28,7 @@ export const useTareaStore=defineStore('tareaStore',{
         tareaSeleccionada:null,
         pagina:1,
         numero_paginas:0,
+        numero_filas:10,
         lista_filtros:[
             {"int_id":1,"str_nombre":"ID"},
             {"int_id":2,"str_nombre":"NOMBRE"},
@@ -116,21 +117,7 @@ export const useTareaStore=defineStore('tareaStore',{
         
         async get_lista_tareas(){
             var pagina=this.pagina-1;
-            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page='+pagina+'&size=10')
-            .then(response => response.json())
-            .then(data => {
-                this.numero_paginas=data.totalPages;
-                this.lista_tareas=data.content;
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-        },
-
-        async get_all_tareas(){
-            var pagina=this.pagina-1;
-            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page='+pagina+'&size=500')
+            fetch('http://localhost:8080/demo-0.0.1-SNAPSHOT/api/v1/tareas/get_all?page='+pagina+'&size='+this.numero_filas)
             .then(response => response.json())
             .then(data => {
                 this.numero_paginas=data.totalPages;

@@ -1,50 +1,50 @@
 <template>
-    <v-hover>
-        <template  v-slot:default="{ isHovering, props }">
-            <v-sheet
-                v-bind="props"
-                elevation="12"
-                border
-                min-height="30"
-                width="95%"
-                :color="isHovering ? 'primary' : 'yellow-accent-1'"
-                class="mt-5"
-                rounded="xl"
-                >
-                <div class="box">
-                    <p align="center"><b>{{ tarea.nombre }}</b></p>
+        <v-tooltip>
+            <template v-slot:activator="{ props }">
+            <v-expansion-panels>
+                <v-expansion-panel v-bind="props"class="ml-2 mr-2 mt-2" :title=tarea.nombre  rounded="xl">
+                    <v-expansion-panel-text>
+                        <div class="box">
+                                
+                                <p>
+                                    <b>Tipo:</b> {{ tarea.str_tipo }} <br>
+                                    <b>Estado:</b> {{ tarea.str_estado }} <br>
+                                    <b>Usuario:</b> {{ tarea.str_usuario }} <br>
+                                    <b>Dscripción:</b> {{ tarea.descripcion }}
+                                </p>
+                                <v-divider class="border-opacity-70" color="black"></v-divider>
 
-                    <v-divider  class="border-opacity-70" color="black"></v-divider>
-
-                    <p>
-                        <b>Tipo:</b> {{ tarea.str_tipo }} <br>
-                        <b>Estado:</b> {{ tarea.str_estado }} <br>
-                        <b>Usuario:</b> {{ tarea.str_usuario }} <br>
-                        <b>Dscripción:</b> {{ tarea.descripcion }}
-                    </p>
-                   
-               
-                    <v-divider class="border-opacity-70" color="black"></v-divider>
-
-                    <div class="container">
-                        <v-btn  density="comfortable"
-                                @click="comentarios"
-                                icon="mdi mdi-comment-text-multiple-outline">
-                        </v-btn>
-                        <v-btn  density="comfortable"
-                                @click="storeLog.visible = true"
-                                icon="mdi mdi-information-outline">
-                        </v-btn>
-                        <v-spacer></v-spacer>
-                        <v-btn  density="comfortable"
-                                @click="eliminar()"
-                                icon="mdi mdi-delete-circle-outline">
-                        </v-btn>
-                    </div>
-                </div>
-            </v-sheet>
-        </template>
-    </v-hover>
+                                <div class="container">
+                                    <v-btn  density="comfortable"
+                                            color="primary"
+                                            @click="comentarios"
+                                            icon="mdi mdi-comment-text-multiple-outline">
+                                    </v-btn>
+                                    <v-btn  density="comfortable"
+                                            color="primary"
+                                            @click="storeLog.visible = true"
+                                            icon="mdi mdi-information-outline">
+                                    </v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn  density="comfortable"
+                                            color="red"
+                                            @click="eliminar()"
+                                            icon="mdi mdi-delete-circle-outline">
+                                    </v-btn>
+                                </div>
+                        </div>
+                    </v-expansion-panel-text>
+                </v-expansion-panel>
+            </v-expansion-panels>
+            </template>
+            <span>
+                <p>
+                    <b>Tipo:</b> {{ tarea.str_tipo }} <br>
+                    <b>Estado:</b> {{ tarea.str_estado }} <br>
+                    <b>Usuario:</b> {{ tarea.str_usuario }} <br>
+                </p>
+            </span>
+        </v-tooltip>
 </template>
 
 <script setup> 
@@ -74,11 +74,17 @@
     }
 </script>
 <style>
+.meregnesTarea {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    }
 .box {
-    margin-top: 15x;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    margin-top: 10x;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     }
 .container {
     display: flex;
