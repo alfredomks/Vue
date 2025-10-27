@@ -144,7 +144,7 @@
     <NuevaTarea></NuevaTarea>
     <AdminComentarios></AdminComentarios>
     <DialogoConfirmacion></DialogoConfirmacion>
-    <Archivo></Archivo>
+    <AdminDocumentos></AdminDocumentos>
 </template>
 
 <script setup>
@@ -154,7 +154,7 @@
     import NuevaTarea from './NuevaTarea.vue';
     import AdminComentarios from '../Comentario/AdminComentarios.vue';
     import DialogoConfirmacion from '../Dialogos/DialogoConfirmacion.vue';
-    import Archivo from '../Documento/Archivo.vue';
+    import AdminDocumentos from '../Documento/AdminDocumentos.vue';
 
     import { useTareaStore } from '@/stores/TareaStore';
     const storeTarea = useTareaStore();
@@ -196,6 +196,7 @@
             };
         storeArchivo.documento=documento;
         storeArchivo.tarea=item;
+        storeArchivo.getArchivos();
         storeArchivo.visible=true;
     }
     const buscar=()=>{
